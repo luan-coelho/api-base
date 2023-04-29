@@ -44,13 +44,11 @@ class UserServiceTest {
     public void testFindById_NotFound_Exception() {
         User savedUser = userService.create(new User(null, "Admin"));
 
-        Assertions.assertThrows(NotFoundException.class, () -> {
-            userService.findById(savedUser.getId() + 1);
-        });
+        Assertions.assertThrows(NotFoundException.class, () -> userService.findById(savedUser.getId() + 1));
     }
 
     @Test
-    public void testCreate_Create_ObjectWithId() {
+    public void testCreate_Success_ObjectWithId() {
         User user = new User(null, "Admin");
         userService.create(user);
 
@@ -58,7 +56,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUpdate_Update_ObjectUpdated() {
+    public void testUpdate_Success_UpdatedObject() {
         User user = new User(null, "Admin");
         User savedUser = userService.create(user);
         User userDto = new User(null, "User");
@@ -68,5 +66,15 @@ class UserServiceTest {
 
         Assertions.assertNotNull(updatedFound);
         Assertions.assertEquals("User", updatedFound.getName());
+    }
+
+    @Test
+    public void testDelete_Success_Object() {
+        User user = new User(null, "Admin");
+        Long id = userService.create(user).getId();
+
+        userService.deleteById(id);
+
+        Assertions.assertThrows(NotFoundException.class, () -> userService.findById(id));
     }
 }
