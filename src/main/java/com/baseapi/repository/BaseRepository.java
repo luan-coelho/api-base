@@ -1,4 +1,4 @@
-package com.baseapi.domain.repository;
+package com.baseapi.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 

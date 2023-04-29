@@ -1,4 +1,4 @@
-package com.baseapi.domain.model;
+package com.baseapi.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

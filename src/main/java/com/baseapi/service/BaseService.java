@@ -1,6 +1,6 @@
 package com.baseapi.service;
 
-import com.baseapi.domain.repository.BaseRepository;
+import com.baseapi.repository.BaseRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;

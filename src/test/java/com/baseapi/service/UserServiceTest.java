@@ -1,6 +1,6 @@
 package com.baseapi.service;
 
-import com.baseapi.domain.model.User;
+import com.baseapi.model.User;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;

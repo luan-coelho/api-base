@@ -1,6 +1,6 @@
-package com.baseapi.domain.repository;
+package com.baseapi.repository;
 
-import com.baseapi.domain.model.User;
+import com.baseapi.model.User;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
