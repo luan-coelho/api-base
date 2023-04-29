@@ -2,13 +2,11 @@ package com.baseapi.handle;
 
 import com.baseapi.exception.ErrorResponse;
 import io.vertx.core.http.HttpServerRequest;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import lombok.SneakyThrows;
-import org.jboss.resteasy.reactive.RestResponse;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -32,33 +30,10 @@ public class GlobalHandleException implements ExceptionMapper<Exception> {
                 .instance(new URI(request.absoluteURI()))
                 .build();
 
-        if (exception instanceof IllegalArgumentException) {
-            handleException(((IllegalArgumentException) exception), errorResponse);
-        } else if (exception instanceof NotFoundException) {
-            handleException(((NotFoundException) exception), errorResponse);
-        } else {
-            handleException(exception, errorResponse);
-        }
+        ExceptionHandler handler = ExceptionHandlerRegistry.getHandler(exception.getClass());
+        handler.handleException(exception, errorResponse);
 
         return errorResponse;
-    }
-
-    private void handleException(IllegalArgumentException exception, ErrorResponse errorResponse) {
-        errorResponse.setTitle("Validation Error");
-        errorResponse.setDetail(exception.getMessage());
-        errorResponse.setStatus(RestResponse.StatusCode.BAD_REQUEST);
-    }
-
-    private void handleException(NotFoundException exception, ErrorResponse errorResponse) {
-        errorResponse.setTitle("Not Found");
-        errorResponse.setDetail(exception.getMessage());
-        errorResponse.setStatus(RestResponse.StatusCode.NOT_FOUND);
-    }
-
-    private void handleException(Exception exception, ErrorResponse errorResponse) {
-        errorResponse.setTitle("Internal Server Error");
-        errorResponse.setDetail(exception.getMessage());
-        errorResponse.setStatus(RestResponse.StatusCode.INTERNAL_SERVER_ERROR);
     }
 }
 
