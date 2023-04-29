@@ -32,7 +32,8 @@ public abstract class BaseService<T, R extends BaseRepository<T>> {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void deleteById(Long id) {
+        findById(id);
         repository.deleteById(id);
     }
 }
