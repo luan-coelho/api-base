@@ -50,9 +50,9 @@ public class GlobalHandleException implements ExceptionMapper<Exception> {
     }
 
     private void handleException(NotFoundException exception, ErrorResponse errorResponse) {
-        errorResponse.setTitle("Validation Error");
+        errorResponse.setTitle("Not Found");
         errorResponse.setDetail(exception.getMessage());
-        errorResponse.setStatus(RestResponse.StatusCode.BAD_REQUEST);
+        errorResponse.setStatus(RestResponse.StatusCode.NOT_FOUND);
     }
 
     private void handleException(Exception exception, ErrorResponse errorResponse) {
