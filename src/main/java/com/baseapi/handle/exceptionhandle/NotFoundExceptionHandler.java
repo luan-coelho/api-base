@@ -1,20 +1,30 @@
-package com.baseapi.handle;
+package com.baseapi.handle.exceptionhandle;
 
 import com.baseapi.exception.ErrorResponse;
 import jakarta.ws.rs.NotFoundException;
 import org.jboss.resteasy.reactive.RestResponse;
 
-class NotFoundExceptionHandler implements ExceptionHandler {
+public class NotFoundExceptionHandler implements ExceptionHandler {
 
     @Override
     public void handleException(Exception exception, ErrorResponse errorResponse) {
-        errorResponse.setTitle("Not Found");
+        errorResponse.setTitle(getTitle());
         errorResponse.setDetail(exception.getMessage());
-        errorResponse.setStatus(RestResponse.StatusCode.NOT_FOUND);
+        errorResponse.setStatus(getStatus());
     }
 
     @Override
     public Class<? extends Exception> getExceptionType() {
         return NotFoundException.class;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Not Found";
+    }
+
+    @Override
+    public int getStatus() {
+        return RestResponse.StatusCode.NOT_FOUND;
     }
 }

@@ -1,5 +1,10 @@
 package com.baseapi.handle;
 
+import com.baseapi.handle.exceptionhandle.ExceptionHandler;
+import com.baseapi.handle.exceptionhandle.GenericExceptionHandler;
+import com.baseapi.handle.exceptionhandle.IllegalArgumentExceptionHandler;
+import com.baseapi.handle.exceptionhandle.NotFoundExceptionHandler;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +15,7 @@ public class ExceptionHandlerRegistry {
     static {
         registerHandler(new IllegalArgumentExceptionHandler());
         registerHandler(new NotFoundExceptionHandler());
-        registerHandler(new GeneralExceptionHandler());
+        registerHandler(new GenericExceptionHandler());
     }
 
     public static void registerHandler(ExceptionHandler handler) {

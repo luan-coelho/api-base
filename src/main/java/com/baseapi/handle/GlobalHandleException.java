@@ -1,6 +1,7 @@
 package com.baseapi.handle;
 
 import com.baseapi.exception.ErrorResponse;
+import com.baseapi.handle.exceptionhandle.ExceptionHandler;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
