@@ -10,9 +10,9 @@ import java.net.URI;
 @AllArgsConstructor
 @NoArgsConstructor
 /*
-Problem Detail
+Problem Details
  */
-public class ErrorResponse {
+public class ProblemDetails {
 
     private URI type;
     private String title;

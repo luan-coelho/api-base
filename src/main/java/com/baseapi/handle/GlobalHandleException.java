@@ -1,6 +1,6 @@
 package com.baseapi.handle;
 
-import com.baseapi.exception.ErrorResponse;
+import com.baseapi.exception.ProblemDetails;
 import com.baseapi.handle.exceptionhandle.ExceptionHandler;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.ws.rs.core.Context;
@@ -21,20 +21,20 @@ public class GlobalHandleException implements ExceptionMapper<Exception> {
     @SneakyThrows
     @Override
     public Response toResponse(Exception exception) {
-        ErrorResponse errorResponse = buildResponse(exception);
-        return Response.status(errorResponse.getStatus()).entity(errorResponse).build();
+        ProblemDetails problemDetails = buildResponse(exception);
+        return Response.status(problemDetails.getStatus()).entity(problemDetails).build();
     }
 
-    private ErrorResponse buildResponse(Exception exception) throws URISyntaxException {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    private ProblemDetails buildResponse(Exception exception) throws URISyntaxException {
+        ProblemDetails problemDetails = ProblemDetails.builder()
                 .type(new URI(""))
                 .instance(new URI(request.absoluteURI()))
                 .build();
 
         ExceptionHandler handler = ExceptionHandlerRegistry.getHandler(exception.getClass());
-        handler.handleException(exception, errorResponse);
+        handler.handleException(exception, problemDetails);
 
-        return errorResponse;
+        return problemDetails;
     }
 }
 
